@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import Test from "./test";
 
 async function getExam(): Promise<any> {
@@ -22,13 +22,26 @@ export default function TestPage() {
 
     const [data, setData] = useState([]);
 
+    const load = useCallback(async (clear?: boolean) => {
+
+        if(clear) localStorage.removeItem('currentTest');
+
+        let newExam = null;
+        do {
+            const dat = await getExam();
+            newExam = dat;
+        } while ((data as any).id && (newExam as any).id != (data as any).id)
+
+        setData(newExam as any);
+    }, [data])
+
     useEffect(() => {
-        getExam().then((dat: any) => setData(dat)).catch(() => null)
+        load();
     }, []);
 
     return(
         <>
-            <Test data={data} />
+            <Test onComplete={() => load(true)} data={data} />
         </>
     )
 }
