@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function Page() {
     return (
@@ -8,7 +9,9 @@ export default function Page() {
                 <p className='text-center'>Desarrollado por <a href='https://alvarolozano.dev' className='text-red-600'>alvarolozano.dev</a></p>
             </div>
 
-            <button className='w-full py-3 bg-black text-white rounded-xl hover:border-black hover:w-full transition-all duration-600 hover:scale-110'>Empezar</button>
+            <Link className='w-full flex flex-col justify-center self-center py-3 bg-black text-white rounded-xl hover:border-black hover:w-full transition-all duration-600 hover:scale-110' href={'/test'}>
+                <span className="text-center">Empezar</span>
+            </Link>
         </>
     )
 }
