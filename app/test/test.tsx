@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
+import Pregunta from "./pregunta";
 import Respuesta from "./respuesta";
+
 
 export default function Test({data, onComplete}: any) {
 
@@ -9,7 +11,7 @@ export default function Test({data, onComplete}: any) {
     const onCompleteCall = useCallback(() => {
         onComplete && onComplete.call && onComplete();
         setCurrent(0);
-    }, [])
+    }, []);
 
     
 
@@ -21,24 +23,9 @@ export default function Test({data, onComplete}: any) {
                 data &&
                 data.preguntas &&
                 data.preguntas.map((pregunta: any, idx: number) => (
-                    <>
-                        <div key={pregunta.id} style={{transform: `translateX(calc(${-100 * current}% - 1em)`, paddingLeft: "2em"}} className={`min-w-full duration-150- transition-all ease-out flex flex-col justify-between ${idx !== current ? 'opacity-50' : 'opacity-100'}`}>
-                            
-                            <div>
-                                <h1 className="text-4xl">#{idx + 1}</h1>
-                                <p className="text-justify">{pregunta.enunciado}</p>
-                            </div>
-
-                            <div className="flex gap-5 flex-col mt-3 align-bottom">
-                                {
-                                pregunta.respuestas.map((respuesta: any) => (
-                                        <Respuesta key={respuesta.id} {...respuesta}/>
-                                ))
-                                }
-                            </div>
-                           
-                        </div>
-                    </>
+                    
+                       <Pregunta key={pregunta.id} {...{pregunta, idx, current}} testId={data.id}/>
+                    
                 ))
             }
             </div>
@@ -59,7 +46,7 @@ export default function Test({data, onComplete}: any) {
                 }
                   {
                     data &&
-                    data.preguntas && current == data.preguntas.length -1 &&
+                    data.preguntas && //current == data.preguntas.length -1 &&
                     <button onClick={() => onCompleteCall()} className="w-full bg-black text-white mt-2 py-2 rounded-xl">finalizar</button>
                   }      
         </div>

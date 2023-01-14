@@ -1,6 +1,7 @@
 'use client'
 
 import { use, useCallback, useEffect, useState } from "react";
+import { clearDatabase } from "./database";
 import Test from "./test";
 
 async function getExam(): Promise<any> {
@@ -22,9 +23,16 @@ export default function TestPage() {
 
     const [data, setData] = useState([]);
 
-    const load = useCallback(async (clear?: boolean) => {
+    const [loaded, setLoaded] = useState(false);
 
-        if(clear) localStorage.removeItem('currentTest');
+
+    const load = useCallback(async (clear?: boolean) => {
+        setLoaded(false);
+
+        if(clear) {
+            localStorage.removeItem('currentTest');
+            await clearDatabase();
+        }
 
         let newExam = null;
         do {
@@ -33,6 +41,7 @@ export default function TestPage() {
         } while ((data as any).id && (newExam as any).id != (data as any).id)
 
         setData(newExam as any);
+        setLoaded(true);
     }, [data])
 
     useEffect(() => {
@@ -41,7 +50,9 @@ export default function TestPage() {
 
     return(
         <>
+        <span style={{opacity: loaded ? 1 : 0.5, width: "100%"}}>
             <Test onComplete={() => load(true)} data={data} />
+        </span>
         </>
     )
 }
