@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DGT exam front
+Este 2023, he decidido (por fin) ponerme en serio con el carnet de conducir. Uno de los mejores métodos para estudiar son los tests online.
 
-## Getting Started
+En la actualidad existen diversas webs para realizar tests, cada una con sus puntos fuertes y debilidades. Este proyecto, junto a https://github.com/alvarolozano/dgt-test-downloader pretende ser un frontend alternativo a las webs existentes, basado en ofrecer una buena experiencia de usuario.
 
-First, run the development server:
+## Ideas para implementar
+- [ ] Scraping web: Se crea un proyecto auxiliar (https://github.com/alvarolozano/dgt-test-downloader)
+- [ ] Persistencia de datos en cliente/nube
+    - [ ] Guardar las respuestas marcadas por el usuario para poder retomar el test más tarde (otras webs no lo ofrecen)
+    - [ ] Almacenar respuestas erróneas para reforzarlas
+    - [ ] Soporte multidispositivo
+- [ ] Varias modalidades para hacer realizar tests
+    - [ ] Test "simulacro": Cronometrado, 30 minutos / 30 preguntas. Se corrige una vez finalizado
+    - [ ] Modo repaso: Preguntas individuales, corregidas instantáneamente
+- [ ] Página de perfil de usuario en el que ver el histórico de fallos (con una gráfica) y permitir la repetición de tests concretos
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Stack
+- Next.js: Framework basado en React, nos ofrece:
+    - SSR
+    - Generación estática
+    - Routing simplificado
+- Dexie: Sistema base de datos en el lado del cliente utilizando indexedDB 
