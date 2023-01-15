@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     appDir: true
+  },
+  images: {
+    domains: ['sedeapl.dgt.gob.es']
   }
 }
 
