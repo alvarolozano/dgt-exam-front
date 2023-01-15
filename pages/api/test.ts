@@ -6,10 +6,13 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  if(!process.env.RAPIDAPI_KEY) return res.status(500).end();
+
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '613da56cf1mshc405870f243f80cp1db3e4jsn041d9bcade71',
+      'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
       'X-RapidAPI-Host': 'examenes-dgt.p.rapidapi.com'
     }
   };
