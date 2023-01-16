@@ -10,8 +10,8 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <div className='absolute h-full w-full bg-neutral-800 flex items-center justify-center'>
-                    <div className='bg-neutral-50 w-11/12 lg:w-4/12 h-max p-4 flex gap-9 rounded-xl flex-col lg:flex-row'>
+                <div className='absolute lg:h-full min-h-full lg:p-0 w-full bg-neutral-800 flex lg:items-center md:items-center h-max justify-center'>
+                    <div className='bg-neutral-50 w-full lg:w-4/12 h-max p-4 flex gap-9 rounded-xl flex-col lg:flex-row'>
                         {children}
                     </div>
                 </div>
