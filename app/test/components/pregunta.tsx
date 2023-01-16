@@ -1,13 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Respuesta from "./respuesta";
-import {saveAnswer, getAnswer} from "./database";
+import {saveAnswer, getAnswer} from "../lib/database";
 import Image from "next/image";
+import { TestContext } from "../lib/examContext";
 
 
 export default function Pregunta({pregunta, current, idx, testId}: any) {
 
     const [disabled, setDisabled] = useState(true);
     const [selected, setSelected] = useState(-1);
+    const { dispatch } = useContext(TestContext);
 
     const setAnswer = useCallback((answer: any) => {
         setDisabled(true);

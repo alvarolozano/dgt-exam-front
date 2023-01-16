@@ -1,8 +1,10 @@
 'use client'
 
 import { use, useCallback, useEffect, useState } from "react";
-import { clearDatabase } from "./database";
-import Test from "./test";
+import Test from "./components/test";
+import { clearDatabase } from "./lib/database";
+import TestLayout, { TestContext } from "./lib/examContext";
+
 
 async function getExam(): Promise<any> {
     const savedTest = window.localStorage.getItem('currentTest');
@@ -50,9 +52,11 @@ export default function TestPage() {
 
     return(
         <>
-        <span style={{opacity: loaded ? 1 : 0.5, width: "100%"}}>
-            <Test onComplete={() => load(true)} data={data} />
-        </span>
+        <TestLayout>
+            <span style={{opacity: loaded ? 1 : 0.5, width: "100%"}}>
+                <Test onComplete={() => load(true)} data={data} />
+            </span>
+        </TestLayout>
         </>
     )
 }
