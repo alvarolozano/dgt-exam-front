@@ -27,7 +27,7 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     }, [])
     
     return (
-    <div key={pregunta.id} style={{transform: `translateX(calc(${-100 * current}% - 1em)`, paddingLeft: "2em"}} className={`min-w-full duration-150- transition-all ease-out flex flex-col justify-between ${idx !== current ? 'opacity-50' : 'opacity-100'}`}>
+    <div key={pregunta.id} style={{transform: `translateX(calc(${-100 * current}%)`}} className={`min-w-full duration-150- transition-all ease-out flex flex-col justify-between ${idx !== current ? 'opacity-50' : 'opacity-100'}`}>
                     
     <div>
         {

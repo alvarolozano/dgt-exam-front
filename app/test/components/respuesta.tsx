@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react"
-import { ExamStateActions } from "../lib/types/reducer";
+import { ExamStateActions } from "../../types/reducer";
 import { TestContext } from "../lib/examContext";
 
 export default function Respuesta(respuesta: any) {
@@ -21,7 +21,9 @@ export default function Respuesta(respuesta: any) {
     }, [respuesta]);
 
     return (
-        <button disabled={!respuesta.enabled} onClick={() => marcarRespuesta()} className={`w-full text-center bg-neutral-400 py-4 rounded-xl ${(marcada || respuesta.selected) ? (respuesta.correcta ? 'bg-green-500' : 'bg-red-600') : ''}`} key={respuesta.id}>
+        <button disabled={!respuesta.enabled} onClick={() => marcarRespuesta()} className={`relative w-full text-center py-4 px-2 rounded-md border-2 ${(marcada || respuesta.selected) ? 'bg-transparent border-transparent' : ''}`} key={respuesta.id}>
+            <span className={`absolute left-0 bottom-0 w-full transition-all ease-linear duration-250  -z-20 rounded-md ${(marcada || respuesta.selected) && respuesta.correcta ? 'h-full' : 'h-0'} bg-green-400`}/>
+            <span className={`absolute left-0 bottom-0 w-full transition-all ease-linear duration-250 -z-20 rounded-md ${(marcada || respuesta.selected) && !respuesta.correcta ? 'h-full' : 'h-0'} bg-red-500`}/>
             {respuesta.contenido}
         </button>
     )

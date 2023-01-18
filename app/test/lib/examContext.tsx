@@ -1,6 +1,6 @@
 'use client'
 
-import { ExamState, ExamStateActions } from "./types/reducer";
+import { ExamState, ExamStateActions } from "../../types/reducer";
 import React, { createContext, useReducer } from "react";
 import { create } from "domain";
 

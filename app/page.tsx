@@ -9,9 +9,17 @@ export default function Page() {
                 <p className='text-center'>Desarrollado por <a href='https://alvarolozano.dev' className='text-red-600'>alvarolozano.dev</a></p>
             </div>
 
-            <Link className='w-full flex flex-col justify-center self-center py-3 bg-black text-white rounded-xl hover:border-black hover:w-full transition-all duration-600 hover:scale-110' href={'/test'}>
-                <span className="text-center">Empezar</span>
-            </Link>
+<div className='w-full flex flex-col justify-center gap-5 self-center'>
+        <Link className="text-center py-3 h-full bg-black text-white rounded-xl hover:border-black hover:w-full transition-all duration-600 hover:scale-110" href={'/test'}>
+                <span>Empezar</span>
+        </Link>
+
+        <Link className="text-center h-full py-3 bg-red-500 text-white rounded-xl hover:border-black hover:w-full transition-all duration-600 hover:scale-110" href={'/repasar'}>
+                <span>Repasar</span>
+        </Link>
+</div>
+            
+            
         </>
     )
 }
