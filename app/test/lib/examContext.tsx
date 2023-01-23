@@ -13,8 +13,6 @@ const initialState: ExamState = {
 
 function reducer(state: any, {action, payload}: {action: ExamStateActions, payload: any}): any {
 
-    console.log(arguments);
-
     if(action == ExamStateActions.reset) {
         return initialState;
     }

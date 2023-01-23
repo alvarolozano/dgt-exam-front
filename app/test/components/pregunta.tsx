@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import Respuesta from "./respuesta";
-import {saveAnswer, getAnswer} from "../lib/database";
+import {saveAnswer, getAnswer, savePreguntaFallada} from "../lib/database";
 import Image from "next/image";
 import { TestContext } from "../lib/examContext";
 
@@ -14,12 +14,14 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     const setAnswer = useCallback((answer: any) => {
         setDisabled(true);
         saveAnswer(testId, idx, answer);
+
+        if(!pregunta.respuestas[answer].correcta)
+            savePreguntaFallada(pregunta);
     }, []);
     
     useEffect(() => {
         getAnswer(testId, idx).then(ans => {
             if(ans !== undefined) {
-                console.log(`found question`)
                 setSelected(ans);
             }
             else setDisabled(false);
@@ -43,7 +45,7 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     <div className="flex gap-5 flex-col mt-3 align-bottom">
         {
         pregunta.respuestas.map((respuesta: any, respuestaIndex: number) => (
-                <Respuesta key={respuesta.id} selected={selected != -1 && selected == respuestaIndex} idx={respuestaIndex} enabled={!disabled} {...respuesta} onAnswer={(ans: any) => setAnswer(respuestaIndex)}/>
+            <Respuesta key={respuesta.id} selected={selected != -1 && selected == respuestaIndex} idx={respuestaIndex} enabled={!disabled} {...respuesta} onAnswer={(ans: any) => setAnswer(respuestaIndex)}/>
         ))
         }
     </div>
