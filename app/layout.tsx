@@ -16,11 +16,12 @@ export default function RootLayout({
                         <h1 className='text-white text-xl'>Exámenes DGT</h1>
                     </Link>
                 </div>
-                <div className='bg-neutral-800 h-screen grid place-items-center grid-cols-6 w-full'>
-                    <div className='bg-neutral-50 col-span-6 lg:col-span-2 w-full lg:col-start-3 col-start-1 h-max p-3 md:p-4 flex gap-9 rounded-xl flex-col lg:flex-row'>
+                
+                <section className="absolute bg-gradient-to-r from-blue-400 to-indigo-700 dark:from-zinc-900 dark:to-slate-900 h-full w-full grid grid-cols-12 items-center grid-flow-col">
+                    <div className={`rounded-md w-full h-max col-span-12 p-4 md:col-start-3 md:col-span-8 2xl:col-span-4 2xl:col-start-5 xl:col-span-5 xl:col-start-4 sm:col-span-12 flex flex-col gap-5 dark:bg-neutral-800 dark:text-white`}>
                         {children}
-                    </div>
                 </div>
+		</section>
             </body>
         </html>
     );

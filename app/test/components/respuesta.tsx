@@ -21,7 +21,7 @@ export default function Respuesta(respuesta: any) {
     }, [respuesta]);
 
     return (
-        <button disabled={!respuesta.enabled} onClick={() => marcarRespuesta()} className={`relative w-full text-center py-4 px-2 rounded-md border-2 overflow-hidden ${(marcada || respuesta.selected) ? 'bg-transparent border-transparent' : ''}`} key={respuesta.id}>
+        <button disabled={!respuesta.enabled} onClick={() => marcarRespuesta()} className={`relative w-full text-center py-4 px-2 rounded-md border-2 overflow-hidden ${(marcada || respuesta.selected) ? 'bg-transparent border-transparent dark:text-black' : ''}`} key={respuesta.id}>
             <span className={`absolute left-0 bottom-0 w-full h-full transition-all ease-linear duration-500  -z-20 rounded-md ${(marcada || respuesta.selected) && respuesta.correcta ? '' : '-translate-y-full'} bg-green-400`}/>
             <span className={`absolute left-0 bottom-0 w-full h-full transition-all ease-linear duration-500 -z-20 rounded-md ${(marcada || respuesta.selected) && !respuesta.correcta ? '' : '-translate-y-full'} bg-red-500`}/>
             {respuesta.contenido}
