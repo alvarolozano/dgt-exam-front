@@ -1,23 +1,27 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Respuesta from "./respuesta";
-import {saveAnswer, getAnswer} from "./database";
+import {saveAnswer, getAnswer, savePreguntaFallada} from "../lib/database";
 import Image from "next/image";
+import { TestContext } from "../lib/examContext";
 
 
 export default function Pregunta({pregunta, current, idx, testId}: any) {
 
     const [disabled, setDisabled] = useState(true);
     const [selected, setSelected] = useState(-1);
+    const { dispatch } = useContext(TestContext);
 
     const setAnswer = useCallback((answer: any) => {
         setDisabled(true);
         saveAnswer(testId, idx, answer);
+
+        if(!pregunta.respuestas[answer].correcta)
+            savePreguntaFallada(pregunta);
     }, []);
     
     useEffect(() => {
         getAnswer(testId, idx).then(ans => {
             if(ans !== undefined) {
-                console.log(`found question`)
                 setSelected(ans);
             }
             else setDisabled(false);
@@ -25,7 +29,7 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     }, [])
     
     return (
-    <div key={pregunta.id} style={{transform: `translateX(calc(${-100 * current}% - 1em)`, paddingLeft: "2em"}} className={`min-w-full duration-150- transition-all ease-out flex flex-col justify-between ${idx !== current ? 'opacity-50' : 'opacity-100'}`}>
+    <div key={pregunta.id} style={{transform: `translateX(calc(${-100 * current}%)`}} className={`min-w-full duration-150- transition-all ease-out flex flex-col justify-between ${idx !== current ? 'opacity-50' : 'opacity-100'}`}>
                     
     <div>
         {
@@ -41,7 +45,7 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     <div className="flex gap-5 flex-col mt-3 align-bottom">
         {
         pregunta.respuestas.map((respuesta: any, respuestaIndex: number) => (
-                <Respuesta key={respuesta.id} selected={selected != -1 && selected == respuestaIndex} idx={respuestaIndex} enabled={!disabled} {...respuesta} onAnswer={(ans: any) => setAnswer(respuestaIndex)}/>
+            <Respuesta key={respuesta.id} selected={selected != -1 && selected == respuestaIndex} idx={respuestaIndex} enabled={!disabled} {...respuesta} onAnswer={(ans: any) => setAnswer(respuestaIndex)}/>
         ))
         }
     </div>

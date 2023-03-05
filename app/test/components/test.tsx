@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react";
 import Pregunta from "./pregunta";
-import Respuesta from "./respuesta";
 
 
 export default function Test({data, onComplete}: any) {
