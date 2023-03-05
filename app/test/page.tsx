@@ -7,14 +7,28 @@ import TestLayout, { TestContext } from "./lib/examContext";
 
 
 async function getExam(): Promise<any> {
-    const savedTest = window.localStorage.getItem('currentTest');
+    let savedTest = window.localStorage.getItem('currentTest');
+
+    try {
+        if(savedTest) {
+            if(!JSON.parse(savedTest).id) throw "";
+        }
+    } catch {
+        savedTest = null;
+    }
 
     if(savedTest == null) {
-        const res = await (await fetch(`/api/test`, {cache: 'no-store'})).json();
+        try {
+            const res = await (await fetch(`/api/test`, {cache: 'no-store'})).json();
+            localStorage.setItem('currentTest', JSON.stringify(res));
+            return res;
+        } catch {
+            localStorage.removeItem('currentTest');
+            await new Promise((resolve: Function) => setTimeout(() => resolve(), 2000));
+            return getExam();
+        }
 
-        localStorage.setItem('currentTest', JSON.stringify(res));
         
-        return res;
     } else {
         return JSON.parse(savedTest);
     }
