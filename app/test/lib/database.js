@@ -55,6 +55,7 @@ export async function getMyExam() {
                 })
             } else {
                 alert("Nada que repasar! Continúa haciendo tests");
+                throw "Nothing";
             }
 
         } else {
@@ -73,7 +74,9 @@ export async function getMyExam() {
         return test;
 
 
-    } catch {}
+    } catch (e) {
+        if(e === 'Nothing') throw e;
+    }
 }
 
 export async function getAnswer(exam, question) {

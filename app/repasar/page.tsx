@@ -5,14 +5,15 @@ import { getMyExam } from "../test/lib/database";
 import Test from "./../test/components/test";
 import { clearDatabase } from "./../test/lib/database";
 import TestLayout, { TestContext } from "./../test/lib/examContext";
+import { useRouter } from 'next/navigation';
 
 
 export default function TestPage() {
 
-
     const [data, setData] = useState([]);
 
     const [loaded, setLoaded] = useState(false);
+    const router = useRouter();
 
 
     const load = useCallback(async (clear?: boolean) => {
@@ -23,11 +24,15 @@ export default function TestPage() {
             // await clearDatabase();
         }
 
+        try {
+            const test = await getMyExam();
+            setData(test as any);
+            setLoaded(true);
+        } catch {
+            router.push('/');
+        }
 
-        const test = await getMyExam();
         
-        setData(test as any);
-        setLoaded(true);
     }, [data])
 
     useEffect(() => {
