@@ -4,7 +4,7 @@ import { use, useCallback, useEffect, useState } from "react";
 import Test from "./components/test";
 import { clearDatabase } from "./lib/database";
 import TestLayout, { TestContext } from "./lib/examContext";
-
+import TestPlaceholder from "./components/testPlaceholder";
 
 async function getExam(): Promise<any> {
     let savedTest = window.localStorage.getItem('currentTest');
@@ -68,7 +68,11 @@ export default function TestPage() {
         <>
         <TestLayout>
             <span style={{opacity: loaded ? 1 : 0.5, width: "100%"}}>
-                <Test onComplete={() => load(true)} data={data} />
+                {
+                    loaded ?
+                        <Test onComplete={() => load(true)} data={data} /> :
+                        <TestPlaceholder />
+                }
             </span>
         </TestLayout>
         </>

@@ -34,7 +34,7 @@ export default function Pregunta({pregunta, current, idx, testId}: any) {
     <div>
         {
         pregunta.imagen &&
-            <div className="relative w-full h-max flex justify-center self-center">
+            <div className="relative w-full h-max flex justify-center self-center" style={{minHeight: 220, minWidth: 289}}>
                 <Image src={pregunta.imagen} alt={`imagen pregunta ${idx + 1}`} height={0} width={300} className="rounded-xl border-neutral-700 p-1 border-2 border-opacity-90" loading="eager"/>   
             </div>
         }
