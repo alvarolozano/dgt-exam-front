@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className=''>
+            <body className='dark'>
                 <div className='absolute z-30 h-16 w-full hidden lg:flex justify-between px-10 items-center'>
                     <Link href={'/'}>
                         <h1 className='text-white text-xl'>Exámenes DGT</h1>
