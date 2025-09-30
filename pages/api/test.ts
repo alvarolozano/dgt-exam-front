@@ -21,6 +21,20 @@ export default function handler(
     fetch('https://examenes-dgt.p.rapidapi.com/', options)
       .then(response => response.json())
       .then(response => {
+        // 2025: Los IDS ya no existen, así que los inventamos
+        
+        const id = String(new Date().getTime());
+
+        return {
+          id,
+          preguntas: response.map((pregunta: any, idx: number) => ({
+            ...pregunta,
+            imagen: pregunta.urlImagen || null,
+            id: `${id}-${idx}`,
+          })),
+        }
+      })
+      .then(response => {
         res.status(200).json(response)
         resol();
       })

@@ -51,10 +51,10 @@ export default function TestPage() {
         }
 
         let newExam = null;
-        do {
+        //do { 2025: Esto es una mala idea... 
             const dat = await getExam();
             newExam = dat;
-        } while ((data as any).id && (newExam as any).id != (data as any).id)
+        //} while ((data as any).id && (newExam as any).id != (data as any).id)
 
         setData(newExam as any);
         setLoaded(true);

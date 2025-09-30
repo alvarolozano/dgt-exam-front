@@ -5,7 +5,7 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    domains: ['sedeapl.dgt.gob.es']
+    domains: ['sedeapl.dgt.gob.es', 'sedeclave.dgt.gob.es']
   }
 }
 
